@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public bool hasKey = false; // æI¤òËù³Ö¤·¤Æ¤¤¤ë¤«¤É¤¦¤«
+    public bool hasKey = false; // éµã‚’æ‰€æŒã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
 
     void Start()
     {
-        hasKey = false; // ¥²©`¥àé_Ê¼•r¤ÏæI¤ò³Ö¤Ã¤Æ¤¤¤Ê¤¤
+        hasKey = false; // ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã¯éµã‚’æŒã£ã¦ã„ãªã„
     }
 }
