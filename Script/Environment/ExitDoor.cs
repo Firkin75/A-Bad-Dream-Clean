@@ -3,25 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class ExitDoor : MonoBehaviour, IInteractable
 {
-    private AudioSource lockedSound;               // æI¤¬¤Ê¤¤ˆöºÏ¤Î¥µ¥¦¥ó¥É
-    private PlayerInventory playerInventory;       // ¥×¥ì¥¤¥ä©`¤ÎËù³ÖÆ·Çéˆó
+    private AudioSource lockedSound;               // éµãŒãªã„å ´åˆã®ã‚µã‚¦ãƒ³ãƒ‰
+    private PlayerInventory playerInventory;       // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ‰€æŒå“æƒ…å ±
 
     void Start()
     {
-        playerInventory = FindFirstObjectByType<PlayerInventory>(); // ¥×¥ì¥¤¥ä©`¤Î¥¤¥ó¥Ù¥ó¥È¥êÈ¡µÃ
-        lockedSound = GetComponent<AudioSource>();                  // AudioSourceÈ¡µÃ
+        playerInventory = FindFirstObjectByType<PlayerInventory>(); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªå–å¾—
+        lockedSound = GetComponent<AudioSource>();                  // AudioSourceå–å¾—
     }
 
     public void Interact()
     {
         if (playerInventory.hasKey)
         {
-            // æI¤òËù³Ö¤·¤Æ¤¤¤ì¤Ğ´Î¤Î¥·©`¥ó¤Ø£¨¥·©`¥ó3£©
+            // éµã‚’æ‰€æŒã—ã¦ã„ã‚Œã°æ¬¡ã®ã‚·ãƒ¼ãƒ³ã¸ï¼ˆã‚·ãƒ¼ãƒ³3ï¼‰
             SceneManager.LoadScene(3);
         }
         else
         {
-            // æI¤¬¤Ê¤¤ˆöºÏ¤ÏÒô¤È¾¯¸æ¥á¥Ã¥»©`¥¸¤ò±íÊ¾
+            // éµãŒãªã„å ´åˆã¯éŸ³ã¨è­¦å‘Šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
             lockedSound.Play();
             MessageManager.Instance.ShowWarningMessage("A key is required");
         }
