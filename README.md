@@ -23,6 +23,4 @@
 ![screemshot2](https://github.com/user-attachments/assets/62b340c5-602d-4b1f-8668-23e52605d99e)
 
 
-[▶ プレイ動画を見る][([https://drive.google.com/...](https://drive.google.com/file/d/1blGZ7nZ8jkOo6EIAxIkqrMNwAa6JZPh8/view?usp=sharing](https://drive.google.com/file/d/1blGZ7nZ8jkOo6EIAxIkqrMNwAa6JZPh8/view?usp=sharing
-)
-)) | [⬇ Windows版をダウンロード][(https://drive.google.com/...)](https://drive.google.com/file/d/1p26A7FAy_04j5gGY6WEaMCnIOoErr35r/view?usp=sharing)
+
