@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class PauseMenuLogic : MonoBehaviour
 {
-    public AudioMixer audioMixer;     // ¥ª©`¥Ç¥£¥ª¥ß¥­¥µ©`¤Ø¤Î²ÎÕÕ£¨ÒôÁ¿Õ{ÕûÓÃ£©
-    public Slider volumeSlider;       // ÒôÁ¿Õ{Õû¥¹¥é¥¤¥À©`
+    public AudioMixer audioMixer;     // ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒŸã‚­ã‚µãƒ¼ã¸ã®å‚ç…§ï¼ˆéŸ³é‡èª¿æ•´ç”¨ï¼‰
+    public Slider volumeSlider;       // éŸ³é‡èª¿æ•´ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼
 
-    private bool isPaused = false;    // ¥İ©`¥ºÖĞ¤«¤É¤¦¤«¤Î¥Õ¥é¥°
+    private bool isPaused = false;    // ãƒãƒ¼ã‚ºä¸­ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
 
     void Start()
     {
-        // ±£´æ¤µ¤ì¤¿ÒôÁ¿¤òÈ¡µÃ£¨¥Ç¥Õ¥©¥ë¥È¤Ï0 dB£©
+        // ä¿å­˜ã•ã‚ŒãŸéŸ³é‡ã‚’å–å¾—ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯0 dBï¼‰
         float savedVolume = PlayerPrefs.GetFloat("MasterVolume", 0f);
         audioMixer.SetFloat("MasterVol", savedVolume);
 
@@ -24,10 +24,10 @@ public class PauseMenuLogic : MonoBehaviour
 
     void Update()
     {
-        // Õi•øÖĞ or ËÀÍöÖĞ¤Ï¥İ©`¥ºŸo„¿
+        // èª­æ›¸ä¸­ or æ­»äº¡ä¸­ã¯ãƒãƒ¼ã‚ºç„¡åŠ¹
         if (!GameManager.isAlive || GameManager.isReading) return;
 
-        // ESC¥­©`¤Ç¥İ©`¥º¤Î¥ª¥ó/¥ª¥ÕÇĞ¤êÌæ¤¨
+        // ESCã‚­ãƒ¼ã§ãƒãƒ¼ã‚ºã®ã‚ªãƒ³/ã‚ªãƒ•åˆ‡ã‚Šæ›¿ãˆ
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -37,52 +37,52 @@ public class PauseMenuLogic : MonoBehaviour
         }
     }
 
-    // ¥²©`¥à¤ò×î³õ¤«¤é¤ä¤êÖ±¤¹£¨¥·©`¥ó0¤òÔÙÕi¤ßŞz¤ß£©
+    // ã‚²ãƒ¼ãƒ ã‚’æœ€åˆã‹ã‚‰ã‚„ã‚Šç›´ã™ï¼ˆã‚·ãƒ¼ãƒ³0ã‚’å†èª­ã¿è¾¼ã¿ï¼‰
     public void reStart()
     {
         SceneManager.LoadSceneAsync(0);
     }
 
-    // ¥á¥¤¥ó¥á¥Ë¥å©`¤Ø‘ø¤ë£¨¥·©`¥ó0¤òÕi¤ßŞz¤ß£©
+    // ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã¸æˆ»ã‚‹ï¼ˆã‚·ãƒ¼ãƒ³0ã‚’èª­ã¿è¾¼ã¿ï¼‰
     public void backToMenu()
     {
         SceneManager.LoadScene(0);
     }
 
-    // ¥²©`¥à¤ò½KÁË£¨¥Ó¥ë¥É°æ¤Ç¤Î¤ßÓĞ„¿£©
+    // ã‚²ãƒ¼ãƒ ã‚’çµ‚äº†ï¼ˆãƒ“ãƒ«ãƒ‰ç‰ˆã§ã®ã¿æœ‰åŠ¹ï¼‰
     public void exitTheGame()
     {
         Application.Quit();
     }
 
-    // ¥İ©`¥º„IÀí
+    // ãƒãƒ¼ã‚ºå‡¦ç†
     public void PauseGame()
     {
         GameManager.gameIsPaused = true;
-        UIManager.Instance.ShowPauseMenu(true); // ¥İ©`¥º¥á¥Ë¥å©`¤ò±íÊ¾
+        UIManager.Instance.ShowPauseMenu(true); // ãƒãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’è¡¨ç¤º
 
-        Time.timeScale = 0f;                    // ¥²©`¥à•régÍ£Ö¹
-        Cursor.lockState = CursorLockMode.None; // ¥«©`¥½¥ë½â·Å
+        Time.timeScale = 0f;                    // ã‚²ãƒ¼ãƒ æ™‚é–“åœæ­¢
+        Cursor.lockState = CursorLockMode.None; // ã‚«ãƒ¼ã‚½ãƒ«è§£æ”¾
         Cursor.visible = true;
 
         isPaused = true;
     }
 
-    // ÒôÁ¿ÔO¶¨¤È±£´æ
+    // éŸ³é‡è¨­å®šã¨ä¿å­˜
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("MasterVol", volume);      // ¼´•r·´Ó³
-        PlayerPrefs.SetFloat("MasterVolume", volume);  // ±£´æ
+        audioMixer.SetFloat("MasterVol", volume);      // å³æ™‚åæ˜ 
+        PlayerPrefs.SetFloat("MasterVolume", volume);  // ä¿å­˜
         PlayerPrefs.Save();
     }
 
-    // ¥İ©`¥º½â³ı„IÀí
+    // ãƒãƒ¼ã‚ºè§£é™¤å‡¦ç†
     public void ResumeGame()
     {
-        UIManager.Instance.ShowPauseMenu(false);   // ¥á¥Ë¥å©`¤ò·Ç±íÊ¾
-        Time.timeScale = 1f;                       // ¥²©`¥àÔÙé_
+        UIManager.Instance.ShowPauseMenu(false);   // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’éè¡¨ç¤º
+        Time.timeScale = 1f;                       // ã‚²ãƒ¼ãƒ å†é–‹
 
-        Cursor.lockState = CursorLockMode.Locked;  // ¥«©`¥½¥ë¹Ì¶¨
+        Cursor.lockState = CursorLockMode.Locked;  // ã‚«ãƒ¼ã‚½ãƒ«å›ºå®š
         Cursor.visible = false;
 
         GameManager.gameIsPaused = false;

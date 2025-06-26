@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
-    public int amountOfHealth; // »ØÍ¤µ¤ì¤ëÌåÁ¦¤ÎÁ¿
+    public int amountOfHealth; // å›å¾©ã•ã‚Œã‚‹ä½“åŠ›ã®é‡
 
     void OnTriggerEnter(Collider other)
     {
-        // ¥×¥ì¥¤¥ä©`¤È½Ó´¥¤·¤¿¤«´_ÕJ
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ¥è§¦ã—ãŸã‹ç¢ºèª
         if (other.CompareTag("Player"))
         {
             PlayerHealth health = other.GetComponent<PlayerHealth>();
 
-            // ¤¹¤Ç¤ËÌåÁ¦¤¬œº¥¿¥ó¤Ê¤éºÎ¤â¤·¤Ê¤¤
+            // ã™ã§ã«ä½“åŠ›ãŒæº€ã‚¿ãƒ³ãªã‚‰ä½•ã‚‚ã—ãªã„
             if (PlayerHealth.currentHealth >= PlayerHealth.maxHealth)
             {
                 return;
             }
 
-            // ÌåÁ¦¤ò»ØÍ¤·¡¢¥á¥Ã¥»©`¥¸¤ò±íÊ¾
+            // ä½“åŠ›ã‚’å›å¾©ã—ã€ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
             health.AddHealth(amountOfHealth);
             MessageManager.Instance.ShowPickupMessage("Picked up a medic kit");
 
-            // „¿¹ûÒô¤òÔÙÉú
+            // åŠ¹æœéŸ³ã‚’å†ç”Ÿ
             MessageManager.Instance.PlayPickupSound();
 
-            // ¤³¤Î»ØÍ¥¢¥¤¥Æ¥à¤òÏûÈ¥
+            // ã“ã®å›å¾©ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ¶ˆå»
             Destroy(gameObject);
         }
     }
