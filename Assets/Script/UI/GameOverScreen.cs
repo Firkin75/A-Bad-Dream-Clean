@@ -5,26 +5,26 @@ public class GameOverScreen : MonoBehaviour
 {
     void Start()
     {
-        // ¥«©`¥½¥ë¤ò±íÊ¾£¦¥í¥Ã¥¯½â³ı
+        // ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¡¨ç¤ºï¼†ãƒ­ãƒƒã‚¯è§£é™¤
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    // ¥²©`¥à¤òÔÙé_£¨¥·©`¥ó1¤òÔÙÕi¤ßŞz¤ß£©
+    // ã‚²ãƒ¼ãƒ ã‚’å†é–‹ï¼ˆã‚·ãƒ¼ãƒ³1ã‚’å†èª­ã¿è¾¼ã¿ï¼‰
     public void reStart()
     {
-        SceneManager.LoadSceneAsync(1); // ¥²©`¥à¥×¥ì¥¤¥·©`¥ó¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹¤¬1
+        SceneManager.LoadSceneAsync(1); // ã‚²ãƒ¼ãƒ ãƒ—ãƒ¬ã‚¤ã‚·ãƒ¼ãƒ³ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒ1
     }
 
-    // ¥á¥¤¥ó¥á¥Ë¥å©`¤Ë‘ø¤ë£¨¥·©`¥ó0£©
+    // ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹ï¼ˆã‚·ãƒ¼ãƒ³0ï¼‰
     public void backToMenu()
     {
-        SceneManager.LoadScene(0); // ¥¿¥¤¥È¥ë»­Ãæ
+        SceneManager.LoadScene(0); // ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢
     }
 
-    // ¥²©`¥à½KÁË£¨¥Ó¥ë¥É°æ¤ÇÓĞ„¿£©
+    // ã‚²ãƒ¼ãƒ çµ‚äº†ï¼ˆãƒ“ãƒ«ãƒ‰ç‰ˆã§æœ‰åŠ¹ï¼‰
     public void Quit()
     {
-        Application.Quit(); // ¥¨¥Ç¥£¥¿¤Ç¤Ï„Ó×÷¤·¤Ş¤»¤ó
+        Application.Quit(); // ã‚¨ãƒ‡ã‚£ã‚¿ã§ã¯å‹•ä½œã—ã¾ã›ã‚“
     }
 }
