@@ -28,8 +28,7 @@
   
 - ノートや鍵、マップなどの収集要素とUI表示（IInteractableインターフェースで実装）
 
-    関連ソースファイル：[IInteractable.cs](Assets/Script/UI/IInteractable.cs)、[InteractManager.cs](Assets/Script/Environment/InteractManager.cs) 、[InteractManager.cs](Assets/Script/Environment/InteractManager.cs) 
-   
+    関連ソースファイル：[IInteractable.cs](Assets/Script/UI/IInteractable.cs)、[InteractManager.cs](Assets/Script/Environment/InteractManager.cs) 
 - チュートリアルUI（移動・インタラクト・戦闘の基本操作を案内）  
 - DOOMライクな照準方式（上下方向の敵を自動照準するバーチカルオートエイム）  
 - 死亡演出とリスタート機能
