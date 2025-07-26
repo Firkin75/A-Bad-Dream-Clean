@@ -28,15 +28,24 @@
   
 - ノートや鍵、マップなどの収集要素とUI表示（IInteractableインターフェースで実装）
 
-    関連ソースファイル：[IInteractable.cs](Assets/Script/UI/IInteractable.cs)、
-  
-- イベントトリガーによるゲーム進行（敵出現、扉解錠など）  
+    関連ソースファイル：[IInteractable.cs](Assets/Script/UI/IInteractable.cs)、[InteractManager.cs](Assets/Script/Environment/InteractManager.cs) 、[InteractManager.cs](Assets/Script/Environment/InteractManager.cs) 
+   
 - チュートリアルUI（移動・インタラクト・戦闘の基本操作を案内）  
 - DOOMライクな照準方式（上下方向の敵を自動照準するバーチカルオートエイム）  
-- 死亡演出とリスタート機能  
+- 死亡演出とリスタート機能
+
+   関連ソースファイル：[PlayerHealth.cs](Assets/Script/Player/PlayerHealth.cs)
+
+  
 - ミニマップ表示  
-- メインメニューでの音量調整機能  
-- ポーズメニュー内の音量調整およびマウス感度設定機能  
+- メインメニューでの音量調整機能
+
+  関連ソースファイル：[MainMenu.cs](Assets/Script/UI/MainMenu.cs)
+  
+- ポーズメニュー内の音量調整およびマウス感度設定機能
+
+  関連ソースファイル：[PauseMenuLogic.cs](Assets/Script/UI/PauseMenuLogic.cs)
+  
 
 ---
 
