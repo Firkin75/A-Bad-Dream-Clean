@@ -18,11 +18,18 @@
 
 ##  主な実装機能
 
-- 一人称視点での移動・攻撃システム  
+- 一人称視点での移動システム
+
+  関連ソースファイル：[PlayerController.cs](Assets/Script/Player/PlayerController.cs)
+  
 - 敵AI（追跡、攻撃、死亡後の処理）
 
   関連ソースファイル：[EnemyController.cs](Assets/Script/Enemy/EnemyController.cs)
-- ノートや鍵、マップなどの収集要素とUI表示（IInteractableインターフェースで実装）  
+  
+- ノートや鍵、マップなどの収集要素とUI表示（IInteractableインターフェースで実装）
+
+    関連ソースファイル：[IInteractable.cs](Assets/Script/UI/IInteractable.cs)、
+  
 - イベントトリガーによるゲーム進行（敵出現、扉解錠など）  
 - チュートリアルUI（移動・インタラクト・戦闘の基本操作を案内）  
 - DOOMライクな照準方式（上下方向の敵を自動照準するバーチカルオートエイム）  
