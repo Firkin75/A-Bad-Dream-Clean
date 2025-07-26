@@ -1,4 +1,4 @@
-#  A Bad Dream - レトロホラーFPS
+#  A Bad Dream 
 
 ##  ゲーム概要
 
