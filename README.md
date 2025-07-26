@@ -19,7 +19,7 @@
 ## 🔧 主な実装機能
 
 - 一人称視点での移動・攻撃システム  
-- 敵AI（追跡、攻撃、死亡後の処理）  [SourceCode](Assets/Scripts/Enemy/EnemyController.cs)
+- 敵AI（追跡、攻撃、死亡後の処理）  [SourceCode](Assets/Script/Enemy/EnemyController.cs)
 - ノートや鍵、マップなどの収集要素とUI表示（IInteractableインターフェースで実装）  
 - イベントトリガーによるゲーム進行（敵出現、扉解錠など）  
 - チュートリアルUI（移動・インタラクト・戦闘の基本操作を案内）  
