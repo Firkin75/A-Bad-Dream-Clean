@@ -33,7 +33,7 @@
 - チュートリアルUI（移動・インタラクト・戦闘の基本操作を案内）  
 - DOOMライクな照準方式（上下方向の敵を自動照準するバーチカルオートエイム）
 
-  関連ソースファイル：[Weapon.cs](Assets/Script/Weapon/Weapon.cs)、[ShotGun.cs](Assets/Script/Weapon/ShotGun.cs)
+  関連ソースファイル：[Weapon.cs](Assets/Script/Weapon/Weapon.cs)、[ShotGun.cs](Assets/Script/Weapon/ShotGun.cs)、[Vertical Auto Aim](GIF/Aiming.gif)
   
 - 死亡演出とリスタート機能
 
