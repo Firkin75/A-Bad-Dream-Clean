@@ -5,26 +5,32 @@ public class GameOverScreen : MonoBehaviour
 {
     void Start()
     {
-        // カーソルを表示＆ロック解除
+        // カーソルを表示し、ロックを解除する（ゲームオーバー画面ではUI操作が必要なため）
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    // ゲームを再開（シーン1を再読み込み）
+    // ゲームを再開（直前のゲームプレイシーンを再読み込み）
     public void reStart()
     {
-        SceneManager.LoadSceneAsync(1); // ゲームプレイシーンのインデックスが1
+        // 最後にプレイしていたシーンのインデックスを取得（デフォルトは1）
+        int lastSceneIndex = PlayerPrefs.GetInt("LastScene", 1);
+
+        // そのシーンを読み込むことでゲームを再スタート
+        SceneManager.LoadScene(lastSceneIndex);
     }
 
-    // メインメニューに戻る（シーン0）
+    // メインメニューに戻る（通常はタイトル画面）
     public void backToMenu()
     {
-        SceneManager.LoadScene(0); // タイトル画面
+        // シーンインデックス0を読み込む（タイトル画面など）
+        SceneManager.LoadScene(0);
     }
 
-    // ゲーム終了（ビルド版で有効）
+    // ゲームを終了（ビルド版でのみ有効）
     public void Quit()
     {
-        Application.Quit(); // エディタでは動作しません
+        // アプリケーションを終了（Unityエディタでは無効）
+        Application.Quit();
     }
 }
