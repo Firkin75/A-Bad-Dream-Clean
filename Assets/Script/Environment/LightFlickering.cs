@@ -2,32 +2,32 @@ using UnityEngine;
 
 public class LightFlickering : MonoBehaviour
 {
-    public float minTime;  // æ¬¡ã®åˆ‡ã‚Šæ›¿ãˆã¾ã§ã®æœ€å°æ™‚é–“
-    public float maxTime;  // æ¬¡ã®åˆ‡ã‚Šæ›¿ãˆã¾ã§ã®æœ€å¤§æ™‚é–“
+    public float minTime;  // ´Î¤ÎÇĞ¤êÌæ¤¨¤Ş¤Ç¤Î×îĞ¡•rég
+    public float maxTime;  // ´Î¤ÎÇĞ¤êÌæ¤¨¤Ş¤Ç¤Î×î´ó•rég
 
-    private float timer;   // ã‚¿ã‚¤ãƒãƒ¼
-    private Light lightOBJ; // å¯¾è±¡ã®ãƒ©ã‚¤ãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+    private float timer;   // ¥¿¥¤¥Ş©`
+    private Light lightOBJ; // ŒÏó¤Î¥é¥¤¥È¥³¥ó¥İ©`¥Í¥ó¥È
 
     void Start()
     {
-        // Lightã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆå–å¾—
+        // Light¥³¥ó¥İ©`¥Í¥ó¥ÈÈ¡µÃ
         lightOBJ = GetComponent<Light>();
-        // æœ€åˆã®ãƒ©ãƒ³ãƒ€ãƒ ã‚¿ã‚¤ãƒãƒ¼ã‚’è¨­å®š
+        // ×î³õ¤Î¥é¥ó¥À¥à¥¿¥¤¥Ş©`¤òÔO¶¨
         timer = Random.Range(minTime, maxTime);
     }
 
     void Update()
     {
-        LightFlicker(); // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ç‚¹æ»…ãƒã‚§ãƒƒã‚¯
+        LightFlicker(); // š°¥Õ¥ì©`¥àµãœç¥Á¥§¥Ã¥¯
     }
 
     void LightFlicker()
     {
-        // ã‚¿ã‚¤ãƒãƒ¼ã‚’æ¸›ã‚‰ã™
+        // ¥¿¥¤¥Ş©`¤òœp¤é¤¹
         if (timer > 0)
             timer -= Time.deltaTime;
 
-        // æ™‚é–“åˆ‡ã‚Œã«ãªã£ãŸã‚‰ãƒ©ã‚¤ãƒˆã®ON/OFFã‚’åˆ‡ã‚Šæ›¿ãˆã€æ¬¡ã®ã‚¿ã‚¤ãƒãƒ¼ã‚’è¨­å®š
+        // •régÇĞ¤ì¤Ë¤Ê¤Ã¤¿¤é¥é¥¤¥È¤ÎON/OFF¤òÇĞ¤êÌæ¤¨¡¢´Î¤Î¥¿¥¤¥Ş©`¤òÔO¶¨
         if (timer <= 0)
         {
             lightOBJ.enabled = !lightOBJ.enabled;

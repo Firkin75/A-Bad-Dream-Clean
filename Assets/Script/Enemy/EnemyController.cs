@@ -1,12 +1,7 @@
-using UnityEngine.AI;
+﻿using UnityEngine.AI;
 using UnityEngine;
 using System.Collections;
-/// <summary>
-/// EnemyController は、敵キャラクターのAI挙動（巡回・追跡・攻撃・死亡）を制御するクラスです。
-/// NavMeshAgent を利用した移動処理、視認・攻撃の判定、アニメーションの制御、
-/// ダメージ処理や死亡処理（死体生成・アイテムドロップ）など、戦闘関連のロジックを包括的に管理します。
-/// また、プレイヤーの銃声に反応する機能も含まれています。
-/// </summary>
+
 public class EnemyController : MonoBehaviour
 {
     // アニメーション制御用：移動方向（外部から読み取り可能）

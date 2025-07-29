@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 // インタラクト（プレイヤーが使用できる物体）を管理するクラス
 public class InteractManager : MonoBehaviour
@@ -36,7 +36,7 @@ public class InteractManager : MonoBehaviour
             if (hitInfo.collider.TryGetComponent(out IInteractable interactObject))
             {
                 // 対象が現在インタラクト可能かどうか判定
-                if (interactObject.IsInteractable()) 
+                if (interactObject.IsInteractable())
                 {
                     currentInteractable = interactObject;              // 有効な対象を記憶
                     UIManager.Instance.ShowInteractUI(true);           // インタラクトUI表示（例：Eキーアイコン）

@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour, IInteractable
 {
-    public GameObject enemySet;            // æ‰‰ã‚’é–‹ã‘ãŸã¨ãå‡ºç¾ã™ã‚‹æ•µã‚»ãƒƒãƒˆ
-    public AudioSource doorSound;          // é–‹é–‰æ™‚ã®ã‚µã‚¦ãƒ³ãƒ‰
-    public AudioSource lockedSound;        // éµãŒå¿…è¦ãªå ´åˆã®ãƒ­ãƒƒã‚¯éŸ³
-    public bool requiresKey = false;       // éµãŒå¿…è¦ã‹ã©ã†ã‹
+    public GameObject enemySet;            // ìé¤òé_¤±¤¿¤È¤­³ö¬F¤¹¤ë”³¥»¥Ã¥È
+    public AudioSource doorSound;          // é_é]•r¤Î¥µ¥¦¥ó¥É
+    public AudioSource lockedSound;        // æI¤¬±ØÒª¤ÊˆöºÏ¤Î¥í¥Ã¥¯Òô
+    public bool requiresKey = false;       // æI¤¬±ØÒª¤«¤É¤¦¤«
 
-    [SerializeField] private float moveSpeed = 2f;             // æ‰‰ã®é–‹é–‰é€Ÿåº¦
-    [SerializeField] private float autoCloseDelay = 5f;        // è‡ªå‹•ã§é–‰ã¾ã‚‹ã¾ã§ã®æ™‚é–“
-    [SerializeField] private Vector3 openOffset = new Vector3(3, 0, 0); // æ‰‰ã®é–‹ãè·é›¢
+    [SerializeField] private float moveSpeed = 2f;             // ìé¤Îé_é]ËÙ¶È
+    [SerializeField] private float autoCloseDelay = 5f;        // ×Ô„Ó¤Çé]¤Ş¤ë¤Ş¤Ç¤Î•rég
+    [SerializeField] private Vector3 openOffset = new Vector3(3, 0, 0); // ìé¤Îé_¤¯¾àëx
 
-    private Transform doorTransform;        // å®Ÿéš›ã«å‹•ã‹ã™æ‰‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
-    private Vector3 closedPosition;         // é–‰ã¾ã£ã¦ã„ã‚‹ä½ç½®
-    private Vector3 openPosition;           // é–‹ã„ã¦ã„ã‚‹ä½ç½®
+    private Transform doorTransform;        // ŒgëH¤Ë„Ó¤«¤¹ìé¥ª¥Ö¥¸¥§¥¯¥È
+    private Vector3 closedPosition;         // é]¤Ş¤Ã¤Æ¤¤¤ëÎ»ÖÃ
+    private Vector3 openPosition;           // é_¤¤¤Æ¤¤¤ëÎ»ÖÃ
     private PlayerInventory playerInventory;
-    private bool isOpen = false;            // æ‰‰ãŒé–‹ã„ã¦ã„ã‚‹ã‹ã©ã†ã‹
-    private bool isEnemyInRange = false;    // æ•µãŒä»˜è¿‘ã«ã„ã‚‹ã‹ã©ã†ã‹
-    private float lastOpenTime = -999f;     // æœ€å¾Œã«é–‹ã„ãŸæ™‚é–“ï¼ˆè‡ªå‹•é–‰é–ç”¨ï¼‰
+    private bool isOpen = false;            // ìé¤¬é_¤¤¤Æ¤¤¤ë¤«¤É¤¦¤«
+    private bool isEnemyInRange = false;    // ”³¤¬¸¶½ü¤Ë¤¤¤ë¤«¤É¤¦¤«
+    private float lastOpenTime = -999f;     // ×îáá¤Ëé_¤¤¤¿•rég£¨×Ô„Óé]æiÓÃ£©
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class DoorScript : MonoBehaviour, IInteractable
         Transform parent = transform.parent;
         if (parent != null)
         {
-            doorTransform = parent.Find("Door"); // "Door"ã¨ã„ã†åå‰ã®å­ã‚’æ¢ã™
+            doorTransform = parent.Find("Door"); // "Door"¤È¤¤¤¦ÃûÇ°¤Î×Ó¤òÌ½¤¹
         }
 
         if (doorTransform == null)
@@ -43,18 +43,18 @@ public class DoorScript : MonoBehaviour, IInteractable
     {
         if (doorTransform == null) return;
 
-        // ä¸€å®šæ™‚é–“å¾Œã«è‡ªå‹•ã§é–‰ã¾ã‚‹å‡¦ç†ï¼ˆæ•µãŒã„ãªã„ã¨ãã®ã¿ï¼‰
+        // Ò»¶¨•régáá¤Ë×Ô„Ó¤Çé]¤Ş¤ë„IÀí£¨”³¤¬¤¤¤Ê¤¤¤È¤­¤Î¤ß£©
         if (isOpen && !isEnemyInRange && Time.time - lastOpenTime >= autoCloseDelay)
         {
             CloseDoor();
         }
 
-        // ç¾åœ¨ã®ç›®æ¨™ä½ç½®ã¸ç§»å‹•ï¼ˆæ»‘ã‚‰ã‹ãªé–‹é–‰ï¼‰
+        // ¬FÔÚ¤ÎÄ¿˜ËÎ»ÖÃ¤ØÒÆ„Ó£¨»¬¤é¤«¤Êé_é]£©
         Vector3 target = isOpen ? openPosition : closedPosition;
         doorTransform.position = Vector3.MoveTowards(doorTransform.position, target, moveSpeed * Time.deltaTime);
     }
 
-    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒEã‚­ãƒ¼ã§ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã—ãŸã¨ãã®å‡¦ç†
+    // ¥×¥ì¥¤¥ä©`¤¬E¥­©`¤Ç¥¤¥ó¥¿¥é¥¯¥È¤·¤¿¤È¤­¤Î„IÀí
     public void Interact()
     {
         if (requiresKey)
@@ -78,7 +78,7 @@ public class DoorScript : MonoBehaviour, IInteractable
         }
     }
 
-    // æ‰‰ã‚’é–‹ãå‡¦ç†
+    // ìé¤òé_¤¯„IÀí
     private void OpenDoor()
     {
         if (isOpen) return;
@@ -89,7 +89,7 @@ public class DoorScript : MonoBehaviour, IInteractable
         if (doorSound != null) doorSound.Play();
     }
 
-    // æ‰‰ã‚’é–‰ã˜ã‚‹å‡¦ç†
+    // ìé¤òé]¤¸¤ë„IÀí
     private void CloseDoor()
     {
         if (!isOpen) return;
@@ -99,14 +99,14 @@ public class DoorScript : MonoBehaviour, IInteractable
         if (doorSound != null) doorSound.Play();
     }
 
-    // æ•µãŒæ‰‰ã®ã‚»ãƒ³ã‚µãƒ¼ã«å…¥ã£ãŸæ™‚
+    // ”³¤¬ìé¤Î¥»¥ó¥µ©`¤ËÈë¤Ã¤¿•r
     public void OnEnemyEnter()
     {
         isEnemyInRange = true;
         OpenDoor();
     }
 
-    // æ•µãŒæ‰‰ã®ã‚»ãƒ³ã‚µãƒ¼ã‹ã‚‰é›¢ã‚ŒãŸæ™‚
+    // ”³¤¬ìé¤Î¥»¥ó¥µ©`¤«¤éëx¤ì¤¿•r
     public void OnEnemyExit()
     {
         isEnemyInRange = false;

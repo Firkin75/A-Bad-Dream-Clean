@@ -1,98 +1,62 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
-public class Knife : MonoBehaviour
+public class Knife : Weapon
 {
-    public float gunDamage = 1;           // 1»Ø¤Î¹¥“Ä¤ÇÓë¤¨¤ë¥À¥á©`¥¸
-    public float gunRange = 2;            // ¹¥“Ä¿ÉÄÜ¤Ê¾àëx
-    public float fireRate = 2f;           // 1Ãë¤¢¤¿¤ê¤Î¹¥“Ä»ØÊı£¨¥¯©`¥ë¥À¥¦¥ó£©
-    public float soundRange = 2;          // ”³¤ËÂ„¤³¤¨¤ë¹ ‡ì£¨¥µ¥¦¥ó¥É°ë¾¶£©
+    // æ•µã«å‘½ä¸­ã—ãŸæ™‚ã«å†ç”Ÿã•ã‚Œã‚‹åŠ¹æœéŸ³ï¼ˆãƒ’ãƒƒãƒˆéŸ³ï¼‰
+    public AudioSource hitSound;
 
-    public AudioSource hitSound;          // ”³¤ËÃüÖĞ¤·¤¿•r¤ÎÒô
-    public AudioSource knifeSound;        // ¿ÕÕñ¤ê•r¤ÎÒô
-    public Camera fpsCam;                 // FPSÒ•µã¤Î¥«¥á¥é
-    public LayerMask enemyLayerMask;      // ”³—Ê³öÓÃ¥ì¥¤¥ä©`
-
-    private Animator gunAnim;             // ¥Ê¥¤¥Õ¤Î¥¢¥Ë¥á©`¥¿©`
-    private Transform player;             // ¥×¥ì¥¤¥ä©`¤ÎTransform
-    private float nextTimeToFire = 0;     // ´Î¤Î¹¥“Ä¿ÉÄÜ•rég
-
-    void Start()
+    // æ”»æ’ƒå‡¦ç†ï¼ˆåŸºåº•ã‚¯ãƒ©ã‚¹Weaponã®Fireãƒ¡ã‚½ãƒƒãƒ‰ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ï¼‰
+    protected override void Fire()
     {
-        gunAnim = GetComponent<Animator>();
+        // æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿï¼ˆAnimatorã®Triggerã‚’ä½¿ã£ã¦"Fire"ã‚’å®Ÿè¡Œï¼‰
+        gunAnim.SetTrigger("Fire");
 
-        // ¥×¥ì¥¤¥ä©`¥ª¥Ö¥¸¥§¥¯¥È¤ò¥¿¥°¤ÇÌ½¤¹
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj != null)
-        {
-            player = playerObj.transform;
-        }
-        else
-        {
-            Debug.LogError("Player not found! 'Player'¥¿¥°¤¬ÔO¶¨¤µ¤ì¤Æ¤¤¤ë¤«´_ÕJ¤·¤Æ¤¯¤À¤µ¤¤¡£");
-        }
-    }
+        // DOOMé¢¨ã®å‚ç›´ã‚ªãƒ¼ãƒˆã‚¨ã‚¤ãƒ ï¼š
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç…§æº–ã¯å·¦å³ï¼ˆæ°´å¹³ï¼‰ã®ã¿å‹•ã‹ã›ã‚‹ãŒã€
+        // æ”»æ’ƒåˆ¤å®šã¯å‚ç›´æ–¹å‘ã‚‚å«ã‚ã¦è‡ªå‹•ã§è£œæ­£ã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹
 
-    void Update()
-    {
-        if (GameManager.isReading || GameManager.gameIsPaused || !GameManager.isAlive) return;
-
-        // ×ó¥¯¥ê¥Ã¥¯¤Ç¹¥“Ä£¨¥¯©`¥ë¥À¥¦¥óÖĞ¤Ç¤Ê¤±¤ì¤Ğ£©
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
-        {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Fire();
-        }
-    }
-
-    // ¹¥“Ä„IÀí
-    void Fire()
-    {
-        gunAnim.SetTrigger("Fire"); // ¥¢¥Ë¥á©`¥·¥ç¥óÔÙÉú
-
-        // ¥µ¥¦¥ó¥É¹ ‡ìÄÚ¤Î”³¤Ëšİ¤Å¤«¤»¤ë
-        Collider[] enemyColliders = Physics.OverlapSphere(player.position, soundRange, enemyLayerMask);
-        foreach (var enemyCollider in enemyColliders)
-        {
-            EnemyController ai = enemyCollider.GetComponent<EnemyController>();
-            if (ai != null)
-            {
-                ai.OnHeardGunshot(); // ã|Éù£¨¥Ê¥¤¥Õ¤Ç¤â£©¤òÂ„¤¤¤¿”³¤ò¥¢¥°¥í×´‘B¤Ë
-            }
-        }
-
-        // DOOMïL¤Î´¹Ö±¥ª©`¥È¥¨¥¤¥à£º¥×¥ì¥¤¥ä©`¤ÎÕÕœÊ¤ÏË®Æ½·½Ïò¤Î¤ß¤Ç¡¢´¹Ö±·½Ïò¤Ï×Ô„Ó¤ÇÃüÖĞÅĞ¶¨
+        // ã‚«ãƒ¡ãƒ©ï¼ˆãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼è¦–ç‚¹ï¼‰ã®ä½ç½®ã‚’åŸç‚¹ã¨ã™ã‚‹
         Vector3 origin = fpsCam.transform.position;
-        Vector3 horizontalDirection = fpsCam.transform.forward;
-        horizontalDirection.y = 0;
-        horizontalDirection.Normalize();
 
-        // SphereCast¤ÇÑ}Êı¥Ò¥Ã¥È—Ê³ö
+        // forwardãƒ™ã‚¯ãƒˆãƒ«ã‚’æ°´å¹³é¢ã«åˆ¶é™ï¼ˆä¸Šä¸‹æ–¹å‘ã¯é™¤å¤–ï¼‰
+        Vector3 horizontalDirection = fpsCam.transform.forward;
+        horizontalDirection.y = 0;             // Yæˆåˆ†ã‚’0ã«ã—ã¦ä¸Šä¸‹æ–¹å‘ã‚’é™¤å»
+        horizontalDirection.Normalize();       // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã«æ­£è¦åŒ–
+
+        // SphereCastAllã‚’ä½¿ã£ã¦å‰æ–¹ã®æ”»æ’ƒåˆ¤å®šã‚’å®Ÿè¡Œ
+        // åŠå¾„0.5ã€é•·ã•gunRangeã®å††æŸ±çŠ¶ã®ç¯„å›²ã§æ•µã‚’æ¤œå‡º
         RaycastHit[] hits = Physics.SphereCastAll(origin, 0.5f, horizontalDirection, gunRange, enemyLayerMask);
 
+        // æœ€ã‚‚è¿‘ãã€ã‹ã¤è¦–ç·šãŒé€šã£ã¦ã„ã‚‹æ•µã‚’è¨˜éŒ²ã™ã‚‹å¤‰æ•°
         RaycastHit? bestTarget = null;
         float bestDistance = float.MaxValue;
 
+        // ãƒ’ãƒƒãƒˆã—ãŸã™ã¹ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’èª¿æŸ»
         foreach (RaycastHit h in hits)
         {
+            // ã‚¿ã‚°ãŒ"Enemy"ã§ãªã„ã‚‚ã®ã¯ç„¡è¦–
             if (h.collider.CompareTag("Enemy"))
             {
-                hitSound.Play(); // ¥Ò¥Ã¥ÈÒô¤òÏÈ¤ËøQ¤é¤¹£¨ŒgëH¤Ïáá¤ÇÅĞ¶¨£©
+                // å‘½ä¸­éŸ³ï¼ˆãƒ’ãƒƒãƒˆéŸ³ï¼‰ã‚’å…ˆã«å†ç”Ÿã™ã‚‹ã“ã¨ã§æ‰“æ’ƒæ„Ÿã‚’æ¼”å‡º
+                hitSound.Play();
 
+                // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰æ•µä¸­å¿ƒã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ã¨è·é›¢ã‚’è¨ˆç®—
                 Vector3 toTarget = h.collider.bounds.center - origin;
                 Ray rayToTarget = new Ray(origin, toTarget.normalized);
                 float distanceToTarget = toTarget.magnitude;
 
-                // ÕÏº¦Îï¥Á¥§¥Ã¥¯£¨TriggerŸoÒ•£©
+                // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µã®é–“ã«éšœå®³ç‰©ãŒã‚ã‚‹ã‹ç¢ºèªï¼ˆTriggerã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã¯ç„¡è¦–ï¼‰
                 if (Physics.Raycast(rayToTarget, out RaycastHit obstacleHit, distanceToTarget, ~0, QueryTriggerInteraction.Ignore))
                 {
+                    // æ•µä»¥å¤–ã®ç‰©ä½“ã«ã¶ã¤ã‹ã£ã¦ã„ãŸå ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
                     if (!obstacleHit.collider.CompareTag("Enemy"))
                     {
-                        continue; // ”³ÒÔÍâ¤ÇÕÚ¤é¤ì¤Æ¤¤¤ë¤Ê¤é¥¹¥­¥Ã¥×
+                        continue;
                     }
                 }
 
-                // Ò•¾€¤¬Í¨¤Ã¤Æ¤¤¤ë”³¤È¤·¤Æ’ñÓÃ£¨×î¤â½ü¤¤ŒÏó¤òƒÏÈ£©
+                // æœ€ã‚‚è¿‘ã„æ•µã‚’bestTargetã¨ã—ã¦è¨˜éŒ²
                 if (distanceToTarget < bestDistance)
                 {
                     bestDistance = distanceToTarget;
@@ -101,19 +65,21 @@ public class Knife : MonoBehaviour
             }
         }
 
-        // ¥À¥á©`¥¸„IÀí
+        // ãƒ­ãƒƒã‚¯ã‚ªãƒ³ã•ã‚ŒãŸæ•µãŒã„ã‚Œã°ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
         if (bestTarget.HasValue)
         {
+            // EnemyControllerã‚’å–å¾—ã—ã¦ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†ã‚’å®Ÿè¡Œ
             EnemyController enemy = bestTarget.Value.collider.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.TakeDamage(gunDamage);
-                Debug.Log("Auto-aim hit enemy: " + enemy.name);
+                enemy.TakeDamage(gunDamage); // ãƒ€ãƒ¡ãƒ¼ã‚¸é©ç”¨
+                Debug.Log("Auto-aim hit enemy: " + enemy.name); // ãƒ‡ãƒãƒƒã‚°ãƒ­ã‚°å‡ºåŠ›
             }
         }
         else
         {
-            knifeSound.Play(); // ¿ÕÕñ¤ê
+            // æ•µãŒã„ãªã‹ã£ãŸå ´åˆã¯ç©ºæŒ¯ã‚ŠéŸ³ã‚’å†ç”Ÿï¼ˆæ”»æ’ƒãŒå¤–ã‚ŒãŸæ™‚ã®ãƒ•ã‚£ãƒ¼ãƒ‰ãƒãƒƒã‚¯ï¼‰
+            WeaponSound.Play();
             Debug.Log("No enemy hit by auto-aim.");
         }
     }
