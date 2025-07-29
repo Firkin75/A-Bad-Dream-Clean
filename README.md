@@ -33,7 +33,7 @@
 - DOOMライクな照準方式（上下方向の敵を自動照準するバーチカルオートエイム）  
 - 死亡演出とリスタート機能
 
-   関連ソースファイル：[PlayerHealth.cs](Assets/Script/Player/PlayerHealth.cs)
+   関連ソースファイル：[PlayerHealth.cs](Assets/Script/Player/PlayerHealth.cs)、[GameOverScreen.cs](Assets/Script/UI/GameOverScreen.cs)
 
   
 - ミニマップ表示  
