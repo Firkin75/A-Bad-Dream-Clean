@@ -30,17 +30,19 @@
 
     関連ソースファイル：[IInteractable.cs](Assets/Script/UI/IInteractable.cs)、[InteractManager.cs](Assets/Script/Environment/InteractManager.cs)
   
-- チュートリアルUI（移動・インタラクト・戦闘の基本操作を案内）  
+
 - DOOMライクな照準方式（上下方向の敵を自動照準するバーチカルオートエイム）
 
-  関連ソースファイル：[Weapon.cs](Assets/Script/Weapon/Weapon.cs)、[ShotGun.cs](Assets/Script/Weapon/ShotGun.cs)、[Vertical Auto Aim](GIF/Aiming.gif)
+  関連ソースファイル：[Weapon.cs](Assets/Script/Weapon/Weapon.cs)、[ShotGun.cs](Assets/Script/Weapon/ShotGun.cs)、[機能紹介](GIF/Aiming.gif)
   
 - 死亡演出とリスタート機能
 
    関連ソースファイル：[PlayerHealth.cs](Assets/Script/Player/PlayerHealth.cs)、[GameOverScreen.cs](Assets/Script/UI/GameOverScreen.cs)
 
-  
-- ミニマップ表示  
+- 2.5Dの敵キャラクター（8方向のスプライトで実装）とゲームオブジェクト
+
+  関連ソースファイル：[EnemySpriteController.cs](Assets/Script/Enemy/EnemySpriteController.cs)、[BillBoard.cs](Assets/Script/Enemy/Billboard.cs)、[機能紹介](GIF/2.5D.gif)
+ 
 - メインメニューでの音量調整機能
 
   関連ソースファイル：[MainMenu.cs](Assets/Script/UI/MainMenu.cs)
@@ -48,6 +50,10 @@
 - ポーズメニュー内の音量調整およびマウス感度設定機能
 
   関連ソースファイル：[PauseMenuLogic.cs](Assets/Script/UI/PauseMenuLogic.cs)
+
+- ミニマップ表示
+  
+- チュートリアルUI（移動・インタラクト・戦闘の基本操作を案内）   
   
 
 ---
